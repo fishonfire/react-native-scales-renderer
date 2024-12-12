@@ -1,4 +1,10 @@
-type ComponentType = 'header' | 'md' | 'image'
+export interface Config {
+  apiBaseURL: string
+  apiVersion: string
+  apiKey: string
+}
+
+export type ComponentType = 'header' | 'md' | 'image'
 
 export interface Block {
   id: number
