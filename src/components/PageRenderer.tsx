@@ -2,17 +2,17 @@ import React from 'react'
 import { View } from 'react-native'
 import MarkdownRenderer from './MarkdownRenderer'
 import ImageRenderer from './ImageRenderer'
-import { Block } from '../types/ScalesCMS'
+import { Page } from '../types/ScalesCMS'
 import HeaderRenderer from './HeaderRenderer'
 
 interface RendererProps {
-  blocks: Block[]
+  page: Page
 }
 
-const Renderer: React.FC<RendererProps> = ({ blocks }) => {
+const PageRenderer: React.FC<RendererProps> = ({ page }) => {
   return (
     <View>
-      {blocks.map(block => {
+      {page.blocks.map(block => {
         switch (block.component_type) {
           case 'header':
             return <HeaderRenderer key={block.id} />
@@ -38,4 +38,4 @@ const Renderer: React.FC<RendererProps> = ({ blocks }) => {
   )
 }
 
-export default Renderer
+export default PageRenderer
