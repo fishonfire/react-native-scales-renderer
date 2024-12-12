@@ -3,6 +3,7 @@ import { View } from 'react-native'
 import MarkdownRenderer from './MarkdownRenderer'
 import ImageRenderer from './ImageRenderer'
 import { Block } from '../types/ScalesCMS'
+import HeaderRenderer from './HeaderRenderer'
 
 interface RendererProps {
   blocks: Block[]
@@ -13,6 +14,8 @@ const Renderer: React.FC<RendererProps> = ({ blocks }) => {
     <View>
       {blocks.map(block => {
         switch (block.component_type) {
+          case 'header':
+            return <HeaderRenderer key={block.id} />
           case 'md':
             return (
               <MarkdownRenderer
@@ -27,7 +30,6 @@ const Renderer: React.FC<RendererProps> = ({ blocks }) => {
                 imageUrl={block.properties.image_url}
               />
             )
-          // Add more cases for other component types
           default:
             return null
         }

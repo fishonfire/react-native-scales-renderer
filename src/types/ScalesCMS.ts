@@ -1,6 +1,8 @@
+type ComponentType = 'header' | 'md' | 'image'
+
 export interface Block {
   id: number
-  component_type: string
+  component_type: ComponentType
   properties: Record<string, any>
 }
 
