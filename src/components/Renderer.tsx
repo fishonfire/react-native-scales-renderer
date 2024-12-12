@@ -2,7 +2,7 @@ import React from 'react'
 import { View } from 'react-native'
 import MarkdownRenderer from './MarkdownRenderer'
 import ImageRenderer from './ImageRenderer'
-import { Block } from '@/types/ScalesCMS'
+import { Block } from '../types/ScalesCMS'
 
 interface RendererProps {
   blocks: Block[]

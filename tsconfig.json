@@ -1,24 +1,26 @@
 {
-  "extends": "@react-native/typescript-config/tsconfig.json",
   "compilerOptions": {
+    "allowJs": false,
+    "esModuleInterop": true,
+    "target": "es2016",
+    "module": "commonjs",
+    "forceConsistentCasingInFileNames": true,
+    "declaration": true,
+    "outDir": "./dist",
     "strict": true,
-
-    "paths": {
-      "@/*": [
-        "./src/*"
-      ]
-    },
-
-    "sourceMap": true,
-    "inlineSources": true,
-    "sourceRoot": "/src",
-    "allowSyntheticDefaultImports": true,
-    "jsx": "react"
+    "jsx": "react-native",
+    "moduleResolution": "node",
+    "skipLibCheck": true,
+    "lib": [
+      "esnext",
+      "esnext.asynciterable"
+    ]
   },
   "include": [
-    "./src/**/*.ts",
-    "./src/**/*.tsx",
-    ".expo/types/**/*.ts",
-    "expo-env.d.ts"
+    "./src"
+  ],
+  "exclude": [
+    "**/*.test.ts",
+    "**/*.test.tsx",
   ]
 }
