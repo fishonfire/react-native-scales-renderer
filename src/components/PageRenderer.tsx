@@ -76,7 +76,7 @@ const PageRenderer: React.FC<RendererProps> = ({ page, customComponents }) => {
         }
 
         // Fallback for unsupported block types
-        return null
+        return <></>
       })}
     </View>
   )
