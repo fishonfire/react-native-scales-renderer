@@ -3,12 +3,17 @@ import axios from 'axios'
 import { Config } from './types/ScalesCMS'
 import PageRenderer from './components/PageRenderer'
 
-interface ScalesCMSProps {
+export interface ScalesCMSProps {
   config: Config
   pageSlug: string
+  customComponents: Record<string, React.ComponentType>
 }
 
-const ScalesCMS: React.FC<ScalesCMSProps> = ({ config, pageSlug }) => {
+const ScalesCMS: React.FC<ScalesCMSProps> = ({
+  config,
+  pageSlug,
+  customComponents,
+}) => {
   const [page, setPage] = React.useState(null)
 
   const { apiBaseURL, apiKey, apiVersion } = config
@@ -35,7 +40,7 @@ const ScalesCMS: React.FC<ScalesCMSProps> = ({ config, pageSlug }) => {
     return <></>
   }
 
-  return <PageRenderer page={page} />
+  return <PageRenderer page={page} customComponents={customComponents} />
 }
 
 export default React.memo(ScalesCMS)

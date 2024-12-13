@@ -4,15 +4,22 @@ import MarkdownRenderer from './MarkdownRenderer'
 import ImageRenderer from './ImageRenderer'
 import { Page } from '../types/ScalesCMS'
 import HeaderRenderer from './HeaderRenderer'
+import { ScalesCMSProps } from '../ScalesCMS'
 
 interface RendererProps {
   page: Page
+  customComponents?: ScalesCMSProps['customComponents']
 }
 
-const PageRenderer: React.FC<RendererProps> = ({ page }) => {
+const PageRenderer: React.FC<RendererProps> = ({ page, customComponents }) => {
   return (
     <View>
       {page.blocks.map(block => {
+        if (customComponents && customComponents[block.component_type]) {
+          const CustomComponent = customComponents[block.component_type]
+          return <CustomComponent key={block.id} {...block.properties} />
+        }
+
         switch (block.component_type) {
           case 'header':
             return <HeaderRenderer key={block.id} />
