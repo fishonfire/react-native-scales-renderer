@@ -2,13 +2,12 @@ import React from 'react'
 import { View } from 'react-native'
 import MarkdownRenderer from './MarkdownRenderer'
 import ImageRenderer from './ImageRenderer'
-import { Page } from '../types/ScalesCMS'
+import { CustomComponents, Page } from '../types/ScalesCMS'
 import HeaderRenderer from './HeaderRenderer'
-import { ScalesCMSProps } from '../ScalesCMS'
 
 interface RendererProps {
   page: Page
-  customComponents?: ScalesCMSProps['customComponents']
+  customComponents?: CustomComponents
 }
 
 const PageRenderer: React.FC<RendererProps> = ({ page, customComponents }) => {

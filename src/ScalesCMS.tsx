@@ -1,12 +1,12 @@
 import React from 'react'
 import axios from 'axios'
-import { Config } from './types/ScalesCMS'
+import { Config, CustomComponents } from './types/ScalesCMS'
 import PageRenderer from './components/PageRenderer'
 
-export interface ScalesCMSProps {
+interface ScalesCMSProps {
   config: Config
   pageSlug: string
-  customComponents?: Record<string, React.ComponentType>
+  customComponents?: CustomComponents
 }
 
 const ScalesCMS: React.FC<ScalesCMSProps> = ({

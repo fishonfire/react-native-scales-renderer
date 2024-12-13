@@ -1,3 +1,5 @@
+import React from 'react'
+
 export interface Config {
   apiBaseURL: string
   apiVersion: string
@@ -32,4 +34,14 @@ export interface ScalesCMSResponse {
   pages: Page[]
   api_version: string
   pagination: Pagination
+}
+
+export type CustomComponentProps =
+  | { content: string }
+  | { image_path: string }
+  | { image_url: string }
+  | Record<string, any>
+
+export interface CustomComponents {
+  [key: string]: React.ComponentType<CustomComponentProps>
 }
