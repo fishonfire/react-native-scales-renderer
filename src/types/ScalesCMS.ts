@@ -18,8 +18,10 @@ export interface CustomComponentPropsMap {
 export type CustomComponentProps<T extends ComponentType> =
   CustomComponentPropsMap[T]
 
-export type CustomComponents = {
+export type CustomComponents<T extends string = never> = {
   [K in ComponentType]: React.ComponentType<CustomComponentProps<K>>
+} & {
+  [K in T]: React.ComponentType<any> // Allow custom components with known names
 }
 
 export interface Block {
