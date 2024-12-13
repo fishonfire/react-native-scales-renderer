@@ -13,25 +13,23 @@ const ScalesCMS: React.FC<ScalesCMSProps> = ({ config, pageSlug }) => {
 
   const { apiBaseURL, apiKey, apiVersion } = config
 
-  const axiosConfig = {
-    baseURL: apiBaseURL,
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      'Content-Type': 'application/json',
-      api_version: apiVersion,
-    },
-  }
-
   React.useEffect(() => {
     axios
-      .get(`/pages/slug/${pageSlug}`, axiosConfig)
+      .get(`/pages/slug/${pageSlug}`, {
+        baseURL: apiBaseURL,
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          'Content-Type': 'application/json',
+          api_version: apiVersion,
+        },
+      })
       .then(response => {
         setPage(response.data)
       })
       .catch(error => {
         console.error(error)
       })
-  }, [pageSlug])
+  }, [config, pageSlug])
 
   if (!page) {
     return <></>
