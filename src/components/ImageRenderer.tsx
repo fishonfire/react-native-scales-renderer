@@ -3,9 +3,13 @@ import { Image, StyleSheet } from 'react-native'
 
 interface ImageRendererProps {
   imageUrl: string
+  imagePath: string
 }
 
-const ImageRenderer: React.FC<ImageRendererProps> = ({ imageUrl }) => {
+const ImageRenderer: React.FC<ImageRendererProps> = ({
+  imageUrl,
+  imagePath,
+}) => {
   return <Image source={{ uri: imageUrl }} style={styles.image} />
 }
 
@@ -17,4 +21,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default ImageRenderer
+export default React.memo(ImageRenderer)

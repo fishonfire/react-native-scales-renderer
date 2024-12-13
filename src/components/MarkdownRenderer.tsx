@@ -16,4 +16,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default MarkdownRenderer
+export default React.memo(MarkdownRenderer)

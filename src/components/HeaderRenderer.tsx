@@ -1,9 +1,11 @@
 import React from 'react'
 
-interface HeaderRendererProps {}
+interface HeaderRendererProps {
+  content: string
+}
 
-const HeaderRenderer: React.FC<HeaderRendererProps> = () => {
+const HeaderRenderer: React.FC<HeaderRendererProps> = ({ content }) => {
   return <></>
 }
 
-export default HeaderRenderer
+export default React.memo(HeaderRenderer)
