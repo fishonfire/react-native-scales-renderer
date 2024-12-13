@@ -6,7 +6,7 @@ import PageRenderer from './components/PageRenderer'
 export interface ScalesCMSProps {
   config: Config
   pageSlug: string
-  customComponents: Record<string, React.ComponentType>
+  customComponents?: Record<string, React.ComponentType>
 }
 
 const ScalesCMS: React.FC<ScalesCMSProps> = ({
