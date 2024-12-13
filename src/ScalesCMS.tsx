@@ -34,7 +34,7 @@ const ScalesCMS: React.FC<ScalesCMSProps> = ({
       .catch(error => {
         console.error(error)
       })
-  }, [config, pageSlug])
+  }, [apiBaseURL, apiKey, apiVersion, config, pageSlug])
 
   if (!page) {
     return <></>

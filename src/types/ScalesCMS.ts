@@ -8,10 +8,24 @@ export interface Config {
 
 export type ComponentType = 'header' | 'md' | 'image'
 
+export interface CustomComponentPropsMap {
+  header: { content: string }
+  md: { content: string }
+  image: { image_url: string; image_path: string }
+  [key: string]: Record<string, any>
+}
+
+export type CustomComponentProps<T extends ComponentType> =
+  CustomComponentPropsMap[T]
+
+export type CustomComponents = {
+  [K in ComponentType]: React.ComponentType<CustomComponentProps<K>>
+}
+
 export interface Block {
   id: number
   component_type: ComponentType
-  properties: Record<string, any>
+  properties: CustomComponentProps<ComponentType>
 }
 
 export interface Page {
@@ -34,14 +48,4 @@ export interface ScalesCMSResponse {
   pages: Page[]
   api_version: string
   pagination: Pagination
-}
-
-export type CustomComponentProps =
-  | { content: string }
-  | { image_path: string }
-  | { image_url: string }
-  | Record<string, any>
-
-export interface CustomComponents {
-  [key: string]: React.ComponentType<CustomComponentProps>
 }
