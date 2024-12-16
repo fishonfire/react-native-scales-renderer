@@ -9,19 +9,19 @@ export interface Config {
 export type ComponentType = 'header' | 'md' | 'image'
 
 export interface CustomComponentPropsMap {
-  header: { content: string }
-  md: { content: string }
-  image: { image_url: string; image_path: string }
+  header: { content?: string }
+  md: { content?: string }
+  image: { image_url?: string; image_path?: string }
   [key: string]: Record<string, any>
 }
 
 export type CustomComponentProps<T extends ComponentType> =
   CustomComponentPropsMap[T]
 
-export type CustomComponents<T extends string = never> = {
+export type CustomComponents = Partial<{
   [K in ComponentType]: React.ComponentType<CustomComponentProps<K>>
-} & {
-  [K in T]: React.ComponentType<any> // Allow custom components with known names
+}> & {
+  [key: string]: React.ComponentType<Record<string, any>> // Allow unknown custom components
 }
 
 export interface Block {

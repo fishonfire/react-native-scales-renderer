@@ -41,10 +41,7 @@ const PageRenderer: React.FC<RendererProps> = ({ page, customComponents }) => {
         // Handle custom components
         if (customComponents && customComponents[block.component_type]) {
           const CustomComponent = customComponents[block.component_type]
-          // Use type assertion based on the component type
-          const properties = block.properties as CustomComponentProps<
-            typeof block.component_type
-          >
+          const properties = block.properties as Record<string, any>
           // @ts-ignore
           return <CustomComponent key={block.id} {...properties} />
         }
@@ -74,9 +71,6 @@ const PageRenderer: React.FC<RendererProps> = ({ page, customComponents }) => {
             />
           )
         }
-
-        // Fallback for unsupported block types
-        return <></>
       })}
     </View>
   )
