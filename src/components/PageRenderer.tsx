@@ -3,12 +3,7 @@ import { View } from 'react-native'
 import MarkdownRenderer from './MarkdownRenderer'
 import ImageRenderer from './ImageRenderer'
 import HeaderRenderer from './HeaderRenderer'
-import {
-  CustomComponents,
-  Page,
-  Block,
-  CustomComponentProps,
-} from '../types/ScalesCMS'
+import { Block, CustomComponents, Page } from '../types/ScalesCMS'
 
 interface RendererProps {
   page: Page
