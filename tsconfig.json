@@ -1,5 +1,9 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "react-native-scales-renderer": ["src/index.ts"]
+    },
     "allowJs": false,
     "esModuleInterop": true,
     "target": "es2016",
@@ -17,10 +21,12 @@
     ]
   },
   "include": [
-    "./src"
+    "./src",
   ],
   "exclude": [
     "**/*.test.ts",
     "**/*.test.tsx",
+    "node_modules",
+    "example"
   ]
 }

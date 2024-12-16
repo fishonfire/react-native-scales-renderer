@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
-import { Config, CustomComponents } from './types/ScalesCMS'
-import PageRenderer from './components/PageRenderer'
+import { Config, CustomComponents } from '../types/ScalesCMS'
+import PageRenderer from './PageRenderer'
 
 interface ScalesCMSProps {
   config: Config
