@@ -1,4 +1,7 @@
 import React from 'react'
+import { StyleSheet } from 'react-native'
+import { type StyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet'
+import { type ImageStyle } from 'react-native/Libraries/StyleSheet/StyleSheetTypes'
 
 export interface Config {
   apiBaseURL: string
@@ -50,4 +53,10 @@ export interface ScalesCMSResponse {
   pages: Page[]
   api_version: string
   pagination: Pagination
+}
+
+export interface Styles {
+  markdown?: StyleSheet.NamedStyles<any>
+  image?: StyleProp<ImageStyle>
+  header?: StyleSheet.NamedStyles<any>
 }
