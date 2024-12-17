@@ -4,16 +4,14 @@ import Markdown from 'react-native-markdown-display'
 
 interface MarkdownRendererProps {
   content: string
+  styles?: StyleSheet.NamedStyles<any>
 }
 
-const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) => {
-  return <Markdown style={styles.markdown}>{content}</Markdown>
+const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
+  content,
+  styles,
+}) => {
+  return <Markdown style={styles}>{content}</Markdown>
 }
-
-const styles = StyleSheet.create({
-  markdown: {
-    // Define your styles here
-  },
-})
 
 export default React.memo(MarkdownRenderer)

@@ -1,13 +1,14 @@
 import React from 'react'
-import { View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import MarkdownRenderer from './MarkdownRenderer'
 import ImageRenderer from './ImageRenderer'
 import HeaderRenderer from './HeaderRenderer'
-import { Block, CustomComponents, Page } from '../types/ScalesCMS'
+import { Block, CustomComponents, Page, Styles } from '../types/ScalesCMS'
 
 interface RendererProps {
   page: Page
   customComponents?: CustomComponents
+  styles?: Styles
 }
 
 // Type guard functions
@@ -29,7 +30,11 @@ function isImageBlock(
   return block.component_type === 'image'
 }
 
-const PageRenderer: React.FC<RendererProps> = ({ page, customComponents }) => {
+const PageRenderer: React.FC<RendererProps> = ({
+  page,
+  customComponents,
+  styles,
+}) => {
   return (
     <View>
       {page.blocks.map(block => {
@@ -44,7 +49,11 @@ const PageRenderer: React.FC<RendererProps> = ({ page, customComponents }) => {
         // Handle built-in components using type guards
         if (isHeaderBlock(block)) {
           return (
-            <HeaderRenderer key={block.id} content={block.properties.content} />
+            <HeaderRenderer
+              key={block.id}
+              content={block.properties.content}
+              styles={styles?.header}
+            />
           )
         }
 
@@ -53,6 +62,7 @@ const PageRenderer: React.FC<RendererProps> = ({ page, customComponents }) => {
             <MarkdownRenderer
               key={block.id}
               content={block.properties.content}
+              styles={styles?.markdown}
             />
           )
         }
@@ -63,6 +73,7 @@ const PageRenderer: React.FC<RendererProps> = ({ page, customComponents }) => {
               key={block.id}
               imageUrl={block.properties.image_url}
               imagePath={block.properties.image_path}
+              styles={styles?.image}
             />
           )
         }
