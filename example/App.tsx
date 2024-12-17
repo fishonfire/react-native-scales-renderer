@@ -1,7 +1,6 @@
 import { StatusBar } from 'expo-status-bar'
 import { Image, ScrollView, StyleSheet, Text, View } from 'react-native'
-import { ScalesCMS, type Config, type CustomComponents } from '../src'
-import { Styles } from '../src/types/ScalesCMS'
+import { ScalesCMS, type Config, type CustomComponents, Styles } from '../src'
 import { useFonts } from 'expo-font'
 import * as SplashScreen from 'expo-splash-screen'
 import { useEffect } from 'react'
