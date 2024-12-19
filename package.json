@@ -1,11 +1,11 @@
 {
   "name": "react-native-scales-renderer",
-  "version": "0.1.16",
+  "version": "0.1.17",
   "description": "A React Native package for rendering custom components based on JSON payloads from ScalesCMS.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc",
+    "build": "npx tsc",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,md}\""
