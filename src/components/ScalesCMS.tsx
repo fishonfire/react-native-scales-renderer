@@ -5,7 +5,8 @@ import PageRenderer from './PageRenderer'
 
 interface ScalesCMSProps {
   config: Config
-  pageSlug: string
+  pageSlug?: string
+  pageId?: number
   customComponents?: CustomComponents
   styles?: Styles
 }
@@ -13,6 +14,7 @@ interface ScalesCMSProps {
 const ScalesCMS: React.FC<ScalesCMSProps> = ({
   config,
   pageSlug,
+  pageId,
   customComponents,
   styles,
 }) => {
@@ -21,8 +23,22 @@ const ScalesCMS: React.FC<ScalesCMSProps> = ({
   const { apiBaseURL, apiKey, apiVersion } = config
 
   React.useEffect(() => {
+    let url
+
+    if (pageId) {
+      url = `/pages/${pageId}`
+    }
+
+    if (pageSlug) {
+      url = `/pages/slug/${pageSlug}`
+    }
+
+    if (!url) {
+      return
+    }
+
     axios
-      .get(`/pages/slug/${pageSlug}`, {
+      .get(url, {
         baseURL: apiBaseURL,
         headers: {
           Authorization: `Bearer ${apiKey}`,
@@ -36,7 +52,7 @@ const ScalesCMS: React.FC<ScalesCMSProps> = ({
       .catch(error => {
         console.error(error)
       })
-  }, [apiBaseURL, apiKey, apiVersion, config, pageSlug])
+  }, [apiBaseURL, apiKey, apiVersion, config, pageId, pageSlug])
 
   if (!page) {
     return <></>
