@@ -9,17 +9,24 @@ export interface Config {
   apiKey: string
 }
 
-export type ComponentType = 'header' | 'md' | 'image'
+export type ComponentType = 'header' | 'md' | 'image' | 'button'
 
-export interface CustomComponentPropsMap {
+export interface ComponentPropsMap {
   header: { content?: string }
   md: { content?: string }
   image: { image_url?: string; image_path?: string }
+  button: {
+    icon: string
+    page_id?: string
+    payload?: string
+    subtitle?: string
+    title?: string
+    url?: string
+  }
   [key: string]: Record<string, any>
 }
 
-export type CustomComponentProps<T extends ComponentType> =
-  CustomComponentPropsMap[T]
+export type CustomComponentProps<T extends ComponentType> = ComponentPropsMap[T]
 
 export type CustomComponents = Partial<{
   [K in ComponentType]: React.ComponentType<CustomComponentProps<K>>
@@ -59,4 +66,9 @@ export interface Styles {
   markdown?: StyleSheet.NamedStyles<any>
   image?: StyleProp<ImageStyle>
   header?: StyleSheet.NamedStyles<any>
+  button?: StyleSheet.NamedStyles<any>
+}
+
+export interface Callbacks {
+  button: (page_id?: string, url?: string, payload?: string) => void
 }

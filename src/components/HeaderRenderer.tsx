@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet } from 'react-native'
 
 interface HeaderRendererProps {
-  content: string
+  content?: string
   styles?: StyleSheet.NamedStyles<any>
 }
 
