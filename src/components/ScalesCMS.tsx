@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import { Config, CustomComponents, Styles } from '../types/ScalesCMS'
+import { Callbacks, Config, CustomComponents, Styles } from '../types/ScalesCMS'
 import PageRenderer from './PageRenderer'
 
 interface ScalesCMSProps {
@@ -9,6 +9,7 @@ interface ScalesCMSProps {
   pageId?: number
   customComponents?: CustomComponents
   styles?: Styles
+  callbacks?: Callbacks
 }
 
 const ScalesCMS: React.FC<ScalesCMSProps> = ({
@@ -17,6 +18,7 @@ const ScalesCMS: React.FC<ScalesCMSProps> = ({
   pageId,
   customComponents,
   styles,
+  callbacks,
 }) => {
   const [page, setPage] = React.useState(null)
 
@@ -63,6 +65,7 @@ const ScalesCMS: React.FC<ScalesCMSProps> = ({
       page={page}
       customComponents={customComponents}
       styles={styles}
+      callbacks={callbacks}
     />
   )
 }

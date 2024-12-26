@@ -1,39 +1,55 @@
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import { View } from 'react-native'
 import MarkdownRenderer from './MarkdownRenderer'
 import ImageRenderer from './ImageRenderer'
 import HeaderRenderer from './HeaderRenderer'
-import { Block, CustomComponents, Page, Styles } from '../types/ScalesCMS'
+import {
+  Block,
+  Callbacks,
+  ComponentPropsMap,
+  CustomComponents,
+  Page,
+  Styles,
+} from '../types/ScalesCMS'
+import ButtonRenderer from './ButtonRenderer'
 
 interface RendererProps {
   page: Page
   customComponents?: CustomComponents
   styles?: Styles
+  callbacks?: Callbacks
 }
 
 // Type guard functions
 function isHeaderBlock(
   block: Block
-): block is Block & { properties: { content: string } } {
+): block is Block & { properties: ComponentPropsMap['header'] } {
   return block.component_type === 'header'
 }
 
 function isMarkdownBlock(
   block: Block
-): block is Block & { properties: { content: string } } {
+): block is Block & { properties: ComponentPropsMap['md'] } {
   return block.component_type === 'md'
 }
 
 function isImageBlock(
   block: Block
-): block is Block & { properties: { image_url: string; image_path: string } } {
+): block is Block & { properties: ComponentPropsMap['image'] } {
   return block.component_type === 'image'
+}
+
+function isButtonBlock(
+  block: Block
+): block is Block & { properties: ComponentPropsMap['button'] } {
+  return block.component_type === 'button'
 }
 
 const PageRenderer: React.FC<RendererProps> = ({
   page,
   customComponents,
   styles,
+  callbacks,
 }) => {
   return (
     <View>
@@ -71,9 +87,24 @@ const PageRenderer: React.FC<RendererProps> = ({
           return (
             <ImageRenderer
               key={block.id}
-              imageUrl={block.properties.image_url}
-              imagePath={block.properties.image_path}
+              image_url={block.properties.image_url}
+              image_path={block.properties.image_path}
               styles={styles?.image}
+            />
+          )
+        }
+
+        if (isButtonBlock(block)) {
+          return (
+            <ButtonRenderer
+              key={block.id}
+              page_id={block.properties.page_id}
+              icon={block.properties.icon}
+              tagline={block.properties.title}
+              text={block.properties.subtitle}
+              payload={block.properties.payload}
+              styles={styles?.button}
+              onPress={callbacks?.button}
             />
           )
         }

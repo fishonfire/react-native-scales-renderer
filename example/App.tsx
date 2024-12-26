@@ -4,6 +4,7 @@ import { ScalesCMS, type Config, type CustomComponents, Styles } from '../src'
 import { useFonts } from 'expo-font'
 import * as SplashScreen from 'expo-splash-screen'
 import { useEffect } from 'react'
+import { Callbacks } from '../src/types/ScalesCMS'
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync()
@@ -41,6 +42,12 @@ export default function App() {
     }
   }, [loaded])
 
+  const callbacks: Callbacks = {
+    button: (page_id, url, payload) => {
+      console.debug('Button clicked:', { page_id: page_id, url, payload })
+    },
+  }
+
   if (!loaded) {
     return null
   }
@@ -54,6 +61,7 @@ export default function App() {
           pageSlug="showcase"
           customComponents={customComponents}
           styles={stylesCMS}
+          callbacks={callbacks}
         />
       </ScrollView>
     </View>
