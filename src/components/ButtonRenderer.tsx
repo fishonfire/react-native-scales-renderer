@@ -3,7 +3,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import Icon from './IconComponent'
 
 interface ButtonRendererProps {
-  icon: string
+  icon?: string
   text?: string
   tagline?: string
   url?: string
@@ -29,8 +29,12 @@ const ButtonRenderer: React.FC<ButtonRendererProps> = ({
     >
       <View style={[_styles.container, styles?.container]}>
         <View style={[_styles.iconContainer, styles?.iconContainer]}>
-          <Icon name={icon} size={16} color="white" />
-          <Text style={[_styles.textTitle, styles?.textTitle]}>{tagline}</Text>
+          {icon && <Icon name={icon} size={16} color="white" />}
+          {tagline && (
+            <Text style={[_styles.textTitle, styles?.textTitle]}>
+              {tagline}
+            </Text>
+          )}
           <Icon
             name="arrow-right"
             size={24}
@@ -39,7 +43,11 @@ const ButtonRenderer: React.FC<ButtonRendererProps> = ({
           />
         </View>
 
-        <Text style={[_styles.textSubtitle, styles?.textSubtitle]}>{text}</Text>
+        {text && (
+          <Text style={[_styles.textSubtitle, styles?.textSubtitle]}>
+            {text}
+          </Text>
+        )}
       </View>
     </TouchableOpacity>
   )
