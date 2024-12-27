@@ -1,6 +1,6 @@
 {
   "name": "react-native-scales-renderer",
-  "version": "0.1.18",
+  "version": "0.1.19",
   "description": "A React Native package for rendering custom components based on JSON payloads from ScalesCMS.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
