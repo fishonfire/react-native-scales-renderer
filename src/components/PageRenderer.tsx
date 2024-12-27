@@ -12,12 +12,15 @@ import {
   Styles,
 } from '../types/ScalesCMS'
 import ButtonRenderer from './ButtonRenderer'
+import ImageButtonRenderer from './ImageButtonRenderer'
+import { Theme } from '@react-navigation/native'
 
 interface RendererProps {
   page: Page
   customComponents?: CustomComponents
   styles?: Styles
   callbacks?: Callbacks
+  theme?: Theme
 }
 
 // Type guard functions
@@ -45,11 +48,18 @@ function isButtonBlock(
   return block.component_type === 'button'
 }
 
+function isImageButtonBlock(
+  block: Block
+): block is Block & { properties: ComponentPropsMap['image_button'] } {
+  return block.component_type === 'image_button'
+}
+
 const PageRenderer: React.FC<RendererProps> = ({
   page,
   customComponents,
   styles,
   callbacks,
+  theme,
 }) => {
   return (
     <View>
@@ -69,6 +79,7 @@ const PageRenderer: React.FC<RendererProps> = ({
               key={block.id}
               content={block.properties.content}
               styles={styles?.header}
+              theme={theme}
             />
           )
         }
@@ -105,6 +116,25 @@ const PageRenderer: React.FC<RendererProps> = ({
               payload={block.properties.payload}
               styles={styles?.button}
               onPress={callbacks?.button}
+              theme={theme}
+            />
+          )
+        }
+
+        if (isImageButtonBlock(block)) {
+          return (
+            <ImageButtonRenderer
+              key={block.id}
+              page_id={block.properties.page_id}
+              icon={block.properties.icon}
+              image_path={block.properties.image_path}
+              image_url={block.properties.image_url}
+              tagline={block.properties.title}
+              text={block.properties.subtitle}
+              payload={block.properties.payload}
+              styles={styles?.image_button}
+              onPress={callbacks?.image_button}
+              theme={theme}
             />
           )
         }

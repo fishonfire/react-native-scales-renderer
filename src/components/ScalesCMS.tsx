@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import { Callbacks, Config, CustomComponents, Styles } from '../types/ScalesCMS'
 import PageRenderer from './PageRenderer'
+import { Theme } from '@react-navigation/native'
 
 interface ScalesCMSProps {
   config: Config
@@ -10,6 +11,7 @@ interface ScalesCMSProps {
   customComponents?: CustomComponents
   styles?: Styles
   callbacks?: Callbacks
+  theme?: Theme
 }
 
 const ScalesCMS: React.FC<ScalesCMSProps> = ({
@@ -19,6 +21,7 @@ const ScalesCMS: React.FC<ScalesCMSProps> = ({
   customComponents,
   styles,
   callbacks,
+  theme,
 }) => {
   const [page, setPage] = React.useState(null)
 
@@ -66,6 +69,7 @@ const ScalesCMS: React.FC<ScalesCMSProps> = ({
       customComponents={customComponents}
       styles={styles}
       callbacks={callbacks}
+      theme={theme}
     />
   )
 }

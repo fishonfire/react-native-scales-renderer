@@ -1,10 +1,12 @@
 import { StatusBar } from 'expo-status-bar'
 import { Image, ScrollView, StyleSheet, Text, View } from 'react-native'
-import { ScalesCMS, type Config, type CustomComponents, Styles } from '../src'
+import { type Config, type CustomComponents, ScalesCMS, Styles } from '../src'
 import { useFonts } from 'expo-font'
 import * as SplashScreen from 'expo-splash-screen'
 import { useEffect } from 'react'
 import { Callbacks } from '../src/types/ScalesCMS'
+import { ThemeProvider } from '@react-navigation/native'
+import { MyTheme } from './theme'
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync()
@@ -46,6 +48,9 @@ export default function App() {
     button: (page_id, url, payload) => {
       console.debug('Button clicked:', { page_id: page_id, url, payload })
     },
+    image_button: (page_id, url, payload) => {
+      console.debug('Image Button clicked:', { page_id: page_id, url, payload })
+    },
   }
 
   if (!loaded) {
@@ -53,18 +58,21 @@ export default function App() {
   }
 
   return (
-    <View style={styles.container}>
-      <StatusBar style="auto" />
-      <ScrollView contentInsetAdjustmentBehavior="automatic">
-        <ScalesCMS
-          config={cmsConfig}
-          pageSlug="showcase"
-          customComponents={customComponents}
-          styles={stylesCMS}
-          callbacks={callbacks}
-        />
-      </ScrollView>
-    </View>
+    <ThemeProvider value={MyTheme}>
+      <View style={styles.container}>
+        <StatusBar style="auto" />
+        <ScrollView contentInsetAdjustmentBehavior="automatic">
+          <ScalesCMS
+            config={cmsConfig}
+            pageSlug="showcase"
+            customComponents={customComponents}
+            styles={stylesCMS}
+            callbacks={callbacks}
+            theme={MyTheme}
+          />
+        </ScrollView>
+      </View>
+    </ThemeProvider>
   )
 }
 
@@ -83,7 +91,7 @@ const styles = StyleSheet.create({
   },
 })
 
-const stylesMarkdown = StyleSheet.create({
+const stylesMarkdown: Styles['markdown'] = StyleSheet.create({
   // The main container
   body: {
     color: '#181D20',
@@ -250,7 +258,89 @@ const stylesMarkdown = StyleSheet.create({
   span: {},
 })
 
+const stylesButton: Styles['image_button'] = StyleSheet.create({
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    padding: 16,
+    borderRadius: 8,
+    gap: 4,
+    width: '100%',
+    backgroundColor: MyTheme.colors.secondary,
+    marginVertical: 8,
+  },
+  iconContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'row',
+    gap: 8,
+  },
+  primary: {
+    backgroundColor: MyTheme.colors.secondary,
+  },
+  secondary: {
+    backgroundColor: MyTheme.colors.text,
+  },
+  text: {
+    color: MyTheme.colors.background,
+  },
+  arrow: {
+    position: 'absolute',
+    right: 0,
+  },
+})
+
+const stylesImageButton: Styles['image_button'] = StyleSheet.create({
+  container: {
+    height: 280,
+    marginVertical: 8,
+  },
+  imageBackground: {
+    flex: 1,
+    borderRadius: 8,
+    overflow: 'hidden',
+  },
+  contentContainer: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    paddingHorizontal: 16,
+    paddingVertical: 24,
+  },
+  iconContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'row',
+    gap: 8,
+  },
+  arrow: {
+    position: 'absolute',
+    top: 20,
+    right: 20,
+  },
+  primary: {
+    backgroundColor: MyTheme.colors.secondary,
+  },
+  secondary: {
+    backgroundColor: MyTheme.colors.text,
+  },
+  text: {
+    color: MyTheme.colors.background,
+  },
+  textTitle: {
+    fontSize: 14,
+    lineHeight: 24,
+    fontFamily: 'Rijksoverheid_Regular',
+  },
+  textSubtitle: {
+    fontSize: 16,
+    lineHeight: 24,
+    fontFamily: 'Rijksoverheid_Heading_Bold',
+  },
+})
+
 const stylesCMS: Styles = {
   markdown: stylesMarkdown,
   image: styles.image,
+  button: stylesButton,
+  image_button: stylesImageButton,
 }

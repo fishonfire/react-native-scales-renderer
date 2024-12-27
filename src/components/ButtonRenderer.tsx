@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import Icon from './Icon'
+import type { Theme } from '@react-navigation/native'
 
 interface ButtonRendererProps {
   icon?: string
@@ -11,6 +12,7 @@ interface ButtonRendererProps {
   payload?: string
   styles?: StyleSheet.NamedStyles<any>
   onPress?: (id?: string, url?: string, payload?: string) => void
+  theme?: Theme
 }
 
 const ButtonRenderer: React.FC<ButtonRendererProps> = ({
@@ -22,6 +24,7 @@ const ButtonRenderer: React.FC<ButtonRendererProps> = ({
   payload,
   styles,
   onPress,
+  theme,
 }) => {
   return (
     <TouchableOpacity
@@ -29,22 +32,30 @@ const ButtonRenderer: React.FC<ButtonRendererProps> = ({
     >
       <View style={[_styles.container, styles?.container]}>
         <View style={[_styles.iconContainer, styles?.iconContainer]}>
-          {icon && <Icon name={icon} size={16} color="white" />}
+          {icon && (
+            <Icon
+              name={icon}
+              size={16}
+              color={theme?.colors.background ?? 'white'}
+            />
+          )}
           {tagline && (
-            <Text style={[_styles.textTitle, styles?.textTitle]}>
+            <Text style={[_styles.textTitle, styles?.text, styles?.textTitle]}>
               {tagline}
             </Text>
           )}
           <Icon
             name="arrow-right"
             size={24}
-            color="white"
+            color={theme?.colors.background ?? 'white'}
             style={_styles.arrow}
           />
         </View>
 
         {text && (
-          <Text style={[_styles.textSubtitle, styles?.textSubtitle]}>
+          <Text
+            style={[_styles.textSubtitle, styles?.text, styles?.textSubtitle]}
+          >
             {text}
           </Text>
         )}
@@ -67,7 +78,10 @@ const _styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'row',
-    gap: '8@ms',
+    gap: 8,
+  },
+  text: {
+    color: 'white',
   },
   textTitle: {
     color: 'white',
