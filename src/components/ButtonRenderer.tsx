@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import Icon from './IconComponent'
+import Icon from './Icon'
 
 interface ButtonRendererProps {
   icon?: string
