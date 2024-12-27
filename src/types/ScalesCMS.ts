@@ -9,7 +9,12 @@ export interface Config {
   apiKey: string
 }
 
-export type ComponentType = 'header' | 'md' | 'image' | 'button'
+export type ComponentType =
+  | 'header'
+  | 'md'
+  | 'image'
+  | 'button'
+  | 'image_button'
 
 export interface ComponentPropsMap {
   header: { content?: string }
@@ -17,6 +22,16 @@ export interface ComponentPropsMap {
   image: { image_url?: string; image_path?: string }
   button: {
     icon?: string
+    page_id?: string
+    payload?: string
+    subtitle?: string
+    title?: string
+    url?: string
+  }
+  image_button: {
+    icon?: string
+    image_path?: string
+    image_url?: string
     page_id?: string
     payload?: string
     subtitle?: string
@@ -67,8 +82,10 @@ export interface Styles {
   image?: StyleProp<ImageStyle>
   header?: StyleSheet.NamedStyles<any>
   button?: StyleSheet.NamedStyles<any>
+  image_button?: StyleSheet.NamedStyles<any>
 }
 
 export interface Callbacks {
-  button: (page_id?: string, url?: string, payload?: string) => void
+  button?: (page_id?: string, url?: string, payload?: string) => void
+  image_button?: (page_id?: string, url?: string, payload?: string) => void
 }

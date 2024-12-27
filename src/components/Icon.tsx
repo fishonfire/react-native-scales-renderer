@@ -6,13 +6,17 @@ import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheetTypes'
 import React from 'react'
 
 interface IconProps {
-  name: string
+  name?: string
   size?: number
   color?: string
   style?: StyleProp<ViewStyle>
 }
 
 const Icon: React.FC<IconProps> = ({ name, size, color, style }) => {
+  if (!name) {
+    return null
+  }
+
   const heroIconName = (name
     .split('-')
     .map(s => capitalizeString(s))
