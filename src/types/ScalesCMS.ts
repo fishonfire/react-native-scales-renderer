@@ -16,7 +16,7 @@ export interface ComponentPropsMap {
   md: { content?: string }
   image: { image_url?: string; image_path?: string }
   button: {
-    icon: string
+    icon?: string
     page_id?: string
     payload?: string
     subtitle?: string
