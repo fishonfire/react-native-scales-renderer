@@ -8,7 +8,6 @@ import {
 } from 'react-native'
 import Icon from './Icon'
 import { type Theme } from '@react-navigation/native'
-import { MyTheme } from '../../example/theme'
 
 interface ImageButtonRendererProps {
   icon?: string
@@ -109,12 +108,6 @@ const _styles = StyleSheet.create({
     position: 'absolute',
     top: 20,
     right: 20,
-  },
-  primary: {
-    backgroundColor: MyTheme.colors.secondary,
-  },
-  secondary: {
-    backgroundColor: MyTheme.colors.text,
   },
   text: {
     color: 'white',

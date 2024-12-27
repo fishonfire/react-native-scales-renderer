@@ -11,6 +11,7 @@
     "forceConsistentCasingInFileNames": true,
     "declaration": true,
     "outDir": "./dist",
+    "rootDir": "./src",
     "strict": true,
     "jsx": "react-native",
     "moduleResolution": "node",
