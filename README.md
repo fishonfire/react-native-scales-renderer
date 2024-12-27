@@ -6,16 +6,22 @@
 
 ## Installation
 
+react-native-scales-renderer requires the following dependencies:
+- axios
+- react-native-svg 
+- react-native-heroicons 
+- react-native-markdown-display 
+
 Install the package using `npm` or `yarn`:
 
 ```bash
-npm install react-native-scales-renderer
+npm install react-native-scales-renderer axios react-native-svg react-native-heroicons react-native-markdown-display 
 ```
 
 or
 
 ```bash
-yarn add react-native-scales-renderer
+yarn add react-native-scales-renderer axios react-native-svg react-native-heroicons react-native-markdown-display
 ```
 
 ---
