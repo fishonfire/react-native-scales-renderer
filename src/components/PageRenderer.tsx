@@ -109,6 +109,7 @@ const PageRenderer: React.FC<RendererProps> = ({
           return (
             <ButtonRenderer
               key={block.id}
+              bg_color_variant={block.properties.bg_color_variant}
               page_id={block.properties.page_id}
               icon={block.properties.icon}
               tagline={block.properties.title}

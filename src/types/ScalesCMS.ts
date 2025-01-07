@@ -2,6 +2,7 @@ import React from 'react'
 import { StyleSheet } from 'react-native'
 import { type StyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet'
 import { type ImageStyle } from 'react-native/Libraries/StyleSheet/StyleSheetTypes'
+import { Theme } from '@react-navigation/native'
 
 export interface Config {
   apiBaseURL: string
@@ -21,6 +22,7 @@ export interface ComponentPropsMap {
   md: { content?: string }
   image: { image_url?: string; image_path?: string }
   button: {
+    bg_color_variant?: keyof Theme['colors']
     icon?: string
     page_id?: string
     payload?: string

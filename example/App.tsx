@@ -258,7 +258,7 @@ const stylesMarkdown: Styles['markdown'] = StyleSheet.create({
   span: {},
 })
 
-const stylesButton: Styles['image_button'] = StyleSheet.create({
+const stylesButton: Styles['button'] = StyleSheet.create({
   container: {
     display: 'flex',
     flexDirection: 'column',
@@ -283,6 +283,16 @@ const stylesButton: Styles['image_button'] = StyleSheet.create({
   },
   text: {
     color: MyTheme.colors.background,
+  },
+  textTitle: {
+    fontSize: 14,
+    lineHeight: 24,
+    fontFamily: 'Rijksoverheid_Regular',
+  },
+  textSubtitle: {
+    fontSize: 16,
+    lineHeight: 24,
+    fontFamily: 'Rijksoverheid_Heading_Bold',
   },
   arrow: {
     position: 'absolute',

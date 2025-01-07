@@ -4,6 +4,7 @@ import Icon from './Icon'
 import type { Theme } from '@react-navigation/native'
 
 interface ButtonRendererProps {
+  bg_color_variant?: keyof Theme['colors']
   icon?: string
   text?: string
   tagline?: string
@@ -16,6 +17,7 @@ interface ButtonRendererProps {
 }
 
 const ButtonRenderer: React.FC<ButtonRendererProps> = ({
+  bg_color_variant,
   icon,
   text,
   tagline,
@@ -30,7 +32,17 @@ const ButtonRenderer: React.FC<ButtonRendererProps> = ({
     <TouchableOpacity
       onPress={() => (onPress ? onPress(page_id, url, payload) : null)}
     >
-      <View style={[_styles.container, styles?.container]}>
+      <View
+        style={[
+          _styles.container,
+          styles?.container,
+          bg_color_variant && theme
+            ? {
+                backgroundColor: theme.colors[bg_color_variant] ?? 'black',
+              }
+            : undefined,
+        ]}
+      >
         <View style={[_styles.iconContainer, styles?.iconContainer]}>
           {icon && (
             <Icon
