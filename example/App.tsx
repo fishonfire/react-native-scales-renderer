@@ -12,15 +12,19 @@ import { MyTheme } from './theme'
 SplashScreen.preventAutoHideAsync()
 
 const cmsConfig: Config = {
-  apiBaseURL:
-    'https://api.mockfly.dev/mocks/e71d1054-9755-4fba-8c38-4d3285d41464/api',
-  apiKey: 'dummy-api-key',
-  apiVersion: 'v1',
+  apiBaseURL: process.env.EXPO_PUBLIC_API_BASE_URL,
+  apiKey: process.env.EXPO_PUBLIC_API_KEY,
+  apiVersion: process.env.EXPO_PUBLIC_API_VERSION,
 }
 
 const customComponents: CustomComponents = {
-  header: ({ content }) => {
-    return <Text>{content}</Text>
+  header: ({ title, subtitle }) => {
+    return (
+      <View>
+        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.subtitle}>{subtitle}</Text>
+      </View>
+    )
   },
   my_custom_image_component: ({ image_url }) => {
     return <Image source={{ uri: image_url }} style={styles.image} />
@@ -64,7 +68,12 @@ export default function App() {
         <ScrollView contentInsetAdjustmentBehavior="automatic">
           <ScalesCMS
             config={cmsConfig}
-            pageSlug="showcase"
+            pageId={process.env.EXPO_PUBLIC_API_PAGE_ID}
+            pageSlug={
+              !process.env.EXPO_PUBLIC_API_PAGE_ID
+                ? process.env.EXPO_PUBLIC_API_PAGE_SLUG
+                : undefined
+            }
             customComponents={customComponents}
             styles={stylesCMS}
             callbacks={callbacks}
@@ -88,6 +97,13 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 100,
     resizeMode: 'contain',
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+  },
+  subtitle: {
+    fontSize: 16,
   },
 })
 
@@ -260,8 +276,28 @@ const stylesMarkdown: Styles['markdown'] = StyleSheet.create({
 
 const stylesButton: Styles['button'] = StyleSheet.create({
   container: {
-    display: 'flex',
+    flex: 1,
+    minWidth: 354,
+    alignItems: 'center',
+    padding: 16,
+    borderRadius: 8,
+    backgroundColor: MyTheme.colors.secondary,
+    marginVertical: 8,
+  },
+  textTitle: {
+    fontSize: 16,
+    lineHeight: 24,
+    fontFamily: 'Rijksoverheid_Heading_Bold',
+    fontWeight: 'bold',
+    color: MyTheme.colors.background,
+  },
+})
+
+const stylesCTAButton: Styles['button'] = StyleSheet.create({
+  container: {
+    flex: 1,
     flexDirection: 'column',
+    minWidth: 354,
     padding: 16,
     borderRadius: 8,
     gap: 4,
@@ -270,16 +306,9 @@ const stylesButton: Styles['button'] = StyleSheet.create({
     marginVertical: 8,
   },
   iconContainer: {
-    display: 'flex',
     alignItems: 'center',
     flexDirection: 'row',
     gap: 8,
-  },
-  primary: {
-    backgroundColor: MyTheme.colors.secondary,
-  },
-  secondary: {
-    backgroundColor: MyTheme.colors.text,
   },
   text: {
     color: MyTheme.colors.background,
@@ -302,6 +331,7 @@ const stylesButton: Styles['button'] = StyleSheet.create({
 
 const stylesImageButton: Styles['image_button'] = StyleSheet.create({
   container: {
+    minWidth: 354,
     height: 280,
     marginVertical: 8,
   },
@@ -317,7 +347,6 @@ const stylesImageButton: Styles['image_button'] = StyleSheet.create({
     paddingVertical: 24,
   },
   iconContainer: {
-    display: 'flex',
     alignItems: 'center',
     flexDirection: 'row',
     gap: 8,
@@ -352,5 +381,6 @@ const stylesCMS: Styles = {
   markdown: stylesMarkdown,
   image: styles.image,
   button: stylesButton,
+  cta_button: stylesCTAButton,
   image_button: stylesImageButton,
 }

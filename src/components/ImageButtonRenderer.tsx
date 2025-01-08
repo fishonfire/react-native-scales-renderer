@@ -91,6 +91,7 @@ const _styles = StyleSheet.create({
     flex: 1,
     borderRadius: 8,
     overflow: 'hidden',
+    backgroundColor: 'black',
   },
   contentContainer: {
     flex: 1,
@@ -99,7 +100,6 @@ const _styles = StyleSheet.create({
     paddingVertical: 24,
   },
   iconContainer: {
-    display: 'flex',
     alignItems: 'center',
     flexDirection: 'row',
     gap: 8,

@@ -1,10 +1,13 @@
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import Icon from './Icon'
 import type { Theme } from '@react-navigation/native'
 
 interface ButtonRendererProps {
   bg_color_variant?: keyof Theme['colors']
-  title?: string
+  icon?: string
+  text?: string
+  tagline?: string
   url?: string
   page_id?: string
   payload?: string
@@ -15,7 +18,9 @@ interface ButtonRendererProps {
 
 const ButtonRenderer: React.FC<ButtonRendererProps> = ({
   bg_color_variant,
-  title,
+  icon,
+  text,
+  tagline,
   url,
   page_id,
   payload,
@@ -38,9 +43,32 @@ const ButtonRenderer: React.FC<ButtonRendererProps> = ({
             : undefined,
         ]}
       >
-        {title && (
-          <Text style={[_styles.textTitle, styles?.text, styles?.textTitle]}>
-            {title}
+        <View style={[_styles.iconContainer, styles?.iconContainer]}>
+          {icon && (
+            <Icon
+              name={icon}
+              size={16}
+              color={theme?.colors.background ?? 'white'}
+            />
+          )}
+          {tagline && (
+            <Text style={[_styles.textTitle, styles?.text, styles?.textTitle]}>
+              {tagline}
+            </Text>
+          )}
+          <Icon
+            name="arrow-right"
+            size={24}
+            color={theme?.colors.background ?? 'white'}
+            style={_styles.arrow}
+          />
+        </View>
+
+        {text && (
+          <Text
+            style={[_styles.textSubtitle, styles?.text, styles?.textSubtitle]}
+          >
+            {text}
           </Text>
         )}
       </View>
@@ -51,11 +79,17 @@ const ButtonRenderer: React.FC<ButtonRendererProps> = ({
 const _styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
+    flexDirection: 'column',
     padding: 16,
     borderRadius: 8,
+    gap: 4,
+    width: '100%',
     backgroundColor: 'black',
-    marginVertical: 8,
+  },
+  iconContainer: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    gap: 8,
   },
   text: {
     color: 'white',
@@ -63,8 +97,14 @@ const _styles = StyleSheet.create({
   textTitle: {
     color: 'white',
     fontSize: 16,
-    lineHeight: 24,
-    fontWeight: 'bold',
+  },
+  textSubtitle: {
+    color: 'white',
+    fontSize: 14,
+  },
+  arrow: {
+    position: 'absolute',
+    right: 0,
   },
 })
 

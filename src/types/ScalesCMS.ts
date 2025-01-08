@@ -15,13 +15,21 @@ export type ComponentType =
   | 'md'
   | 'image'
   | 'button'
+  | 'cta_button'
   | 'image_button'
 
 export interface ComponentPropsMap {
-  header: { content?: string }
+  header: { title?: string; subtitle?: string }
   md: { content?: string }
   image: { image_url?: string; image_path?: string }
   button: {
+    bg_color_variant?: keyof Theme['colors']
+    page_id?: string
+    payload?: string
+    title?: string
+    url?: string
+  }
+  cta_button: {
     bg_color_variant?: keyof Theme['colors']
     icon?: string
     page_id?: string
@@ -84,6 +92,7 @@ export interface Styles {
   image?: StyleProp<ImageStyle>
   header?: StyleSheet.NamedStyles<any>
   button?: StyleSheet.NamedStyles<any>
+  cta_button?: StyleSheet.NamedStyles<any>
   image_button?: StyleSheet.NamedStyles<any>
 }
 
