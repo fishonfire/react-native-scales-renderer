@@ -14,6 +14,7 @@ import {
 import ButtonRenderer from './ButtonRenderer'
 import ImageButtonRenderer from './ImageButtonRenderer'
 import { Theme } from '@react-navigation/native'
+import CTAButtonRenderer from './CTAButtonRenderer'
 
 interface RendererProps {
   page: Page
@@ -48,6 +49,12 @@ function isButtonBlock(
   return block.component_type === 'button'
 }
 
+function isCTAButtonBlock(
+  block: Block
+): block is Block & { properties: ComponentPropsMap['cta_button'] } {
+  return block.component_type === 'cta_button'
+}
+
 function isImageButtonBlock(
   block: Block
 ): block is Block & { properties: ComponentPropsMap['image_button'] } {
@@ -77,7 +84,8 @@ const PageRenderer: React.FC<RendererProps> = ({
           return (
             <HeaderRenderer
               key={block.id}
-              content={block.properties.content}
+              title={block.properties.title}
+              subtitle={block.properties.subtitle}
               styles={styles?.header}
               theme={theme}
             />
@@ -109,12 +117,28 @@ const PageRenderer: React.FC<RendererProps> = ({
           return (
             <ButtonRenderer
               key={block.id}
+              bg_color_variant={block.properties.bg_color_variant}
+              page_id={block.properties.page_id}
+              title={block.properties.title}
+              payload={block.properties.payload}
+              styles={styles?.button}
+              onPress={callbacks?.button}
+              theme={theme}
+            />
+          )
+        }
+
+        if (isCTAButtonBlock(block)) {
+          return (
+            <CTAButtonRenderer
+              key={block.id}
+              bg_color_variant={block.properties.bg_color_variant}
               page_id={block.properties.page_id}
               icon={block.properties.icon}
               tagline={block.properties.title}
               text={block.properties.subtitle}
               payload={block.properties.payload}
-              styles={styles?.button}
+              styles={styles?.cta_button}
               onPress={callbacks?.button}
               theme={theme}
             />
