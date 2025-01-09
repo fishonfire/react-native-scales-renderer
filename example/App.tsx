@@ -274,6 +274,18 @@ const stylesMarkdown: Styles['markdown'] = StyleSheet.create({
   span: {},
 })
 
+const stylesButtonCollection: Styles['button_collection'] = StyleSheet.create({
+  container: {
+    flex: 1,
+    minWidth: 354,
+    backgroundColor: MyTheme.colors.background,
+    marginVertical: 20,
+  },
+  buttonContainer: {
+    marginVertical: 0,
+  },
+})
+
 const stylesButton: Styles['button'] = StyleSheet.create({
   container: {
     flex: 1,
@@ -282,7 +294,7 @@ const stylesButton: Styles['button'] = StyleSheet.create({
     padding: 16,
     borderRadius: 8,
     backgroundColor: MyTheme.colors.secondary,
-    marginVertical: 8,
+    marginVertical: 4,
   },
   textTitle: {
     fontSize: 16,
@@ -383,4 +395,5 @@ const stylesCMS: Styles = {
   button: stylesButton,
   cta_button: stylesCTAButton,
   image_button: stylesImageButton,
+  button_collection: stylesButtonCollection,
 }
