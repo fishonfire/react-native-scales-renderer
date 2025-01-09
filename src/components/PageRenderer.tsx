@@ -15,6 +15,7 @@ import ButtonRenderer from './ButtonRenderer'
 import ImageButtonRenderer from './ImageButtonRenderer'
 import { Theme } from '@react-navigation/native'
 import CTAButtonRenderer from './CTAButtonRenderer'
+import ButtonCollectionRenderer from './ButtonCollectionRenderer'
 
 interface RendererProps {
   page: Page
@@ -41,6 +42,12 @@ function isImageBlock(
   block: Block
 ): block is Block & { properties: ComponentPropsMap['image'] } {
   return block.component_type === 'image'
+}
+
+function isButtonCollectionBlock(
+  block: Block
+): block is Block & { properties: ComponentPropsMap['button_collection'] } {
+  return block.component_type === 'button_collection'
 }
 
 function isButtonBlock(
@@ -109,6 +116,19 @@ const PageRenderer: React.FC<RendererProps> = ({
               image_url={block.properties.image_url}
               image_path={block.properties.image_path}
               styles={styles?.image}
+            />
+          )
+        }
+
+        if (isButtonCollectionBlock(block)) {
+          return (
+            <ButtonCollectionRenderer
+              key={block.id}
+              buttons={block.properties.buttons}
+              stylesButtons={styles?.button}
+              styles={styles?.button_collection}
+              onPress={callbacks?.button}
+              theme={theme}
             />
           )
         }
