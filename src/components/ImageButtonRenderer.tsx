@@ -13,8 +13,8 @@ interface ImageButtonRendererProps {
   icon?: string
   image_path?: string
   image_url?: string
-  text?: string
-  tagline?: string
+  subtitle?: string
+  title?: string
   url?: string
   page_id?: string
   payload?: string
@@ -27,8 +27,8 @@ const ImageButtonRenderer: React.FC<ImageButtonRendererProps> = ({
   icon,
   image_path,
   image_url,
-  text,
-  tagline,
+  subtitle,
+  title,
   url,
   page_id,
   payload,
@@ -61,20 +61,20 @@ const ImageButtonRenderer: React.FC<ImageButtonRendererProps> = ({
               />
             )}
 
-            {tagline && (
+            {title && (
               <Text
                 style={[_styles.textTitle, styles?.text, styles?.textTitle]}
               >
-                {tagline}
+                {title}
               </Text>
             )}
           </View>
 
-          {text && (
+          {subtitle && (
             <Text
               style={[_styles.textSubtitle, styles?.text, styles?.textSubtitle]}
             >
-              {text}
+              {subtitle}
             </Text>
           )}
         </View>

@@ -18,6 +18,7 @@ export type ComponentType =
   | 'cta_button'
   | 'image_button'
   | 'button_collection'
+  | 'image_button_collection'
 
 export interface ComponentPropsMap {
   header: { title?: string; subtitle?: string }
@@ -51,6 +52,9 @@ export interface ComponentPropsMap {
   }
   button_collection: {
     buttons: ComponentPropsMap['button'][]
+  }
+  image_button_collection: {
+    buttons: ComponentPropsMap['image_button'][]
   }
   [key: string]: Record<string, any>
 }
@@ -99,6 +103,8 @@ export interface Styles {
   cta_button?: StyleSheet.NamedStyles<any>
   image_button?: StyleSheet.NamedStyles<any>
   button_collection?: StyleSheet.NamedStyles<any>
+  image_button_collection?: StyleSheet.NamedStyles<any>
+  image_button_collection_item?: StyleSheet.NamedStyles<any>
 }
 
 export interface Callbacks {

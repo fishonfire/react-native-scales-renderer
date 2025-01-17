@@ -89,7 +89,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
     justifyContent: 'center',
     padding: 16,
   },
@@ -286,6 +285,49 @@ const stylesButtonCollection: Styles['button_collection'] = StyleSheet.create({
   },
 })
 
+const stylesImageButtonCollection: Styles['image_button_collection'] =
+  StyleSheet.create({
+    listContentContainer: {
+      gap: 8,
+    },
+    listColumnWrapper: {
+      gap: 8,
+    },
+    listItemContainer: {
+      flex: 1,
+    },
+  })
+
+const stylesImageButtonCollectionItem: Styles['image_button_collection_item'] =
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      height: 120,
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    imageBackground: {
+      flex: 1,
+      height: '100%',
+      justifyContent: 'flex-end',
+    },
+    arrow: {
+      position: 'absolute',
+      top: 16,
+      right: 16,
+    },
+    contentContainer: {
+      paddingHorizontal: 16,
+      paddingVertical: 16,
+    },
+    textTitle: {
+      color: MyTheme.colors.background,
+    },
+    textSubtitle: {
+      color: MyTheme.colors.background,
+    },
+  })
+
 const stylesButton: Styles['button'] = StyleSheet.create({
   container: {
     flex: 1,
@@ -305,7 +347,7 @@ const stylesButton: Styles['button'] = StyleSheet.create({
   },
 })
 
-const stylesCTAButton: Styles['button'] = StyleSheet.create({
+const stylesCTAButton: Styles['cta_button'] = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
@@ -391,9 +433,15 @@ const stylesImageButton: Styles['image_button'] = StyleSheet.create({
 
 const stylesCMS: Styles = {
   markdown: stylesMarkdown,
-  image: styles.image,
+  image: {
+    width: '100%',
+    height: 420,
+    resizeMode: 'cover',
+  },
   button: stylesButton,
   cta_button: stylesCTAButton,
   image_button: stylesImageButton,
   button_collection: stylesButtonCollection,
+  image_button_collection: stylesImageButtonCollection,
+  image_button_collection_item: stylesImageButtonCollectionItem,
 }
