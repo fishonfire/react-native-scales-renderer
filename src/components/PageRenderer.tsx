@@ -16,6 +16,7 @@ import ImageButtonRenderer from './ImageButtonRenderer'
 import { Theme } from '@react-navigation/native'
 import CTAButtonRenderer from './CTAButtonRenderer'
 import ButtonCollectionRenderer from './ButtonCollectionRenderer'
+import ImageButtonCollectionRenderer from './ImageButtonCollectionRenderer'
 
 interface RendererProps {
   page: Page
@@ -48,6 +49,12 @@ function isButtonCollectionBlock(
   block: Block
 ): block is Block & { properties: ComponentPropsMap['button_collection'] } {
   return block.component_type === 'button_collection'
+}
+
+function isImageButtonCollectionBlock(block: Block): block is Block & {
+  properties: ComponentPropsMap['image_button_collection']
+} {
+  return block.component_type === 'image_button_collection'
 }
 
 function isButtonBlock(
@@ -133,6 +140,19 @@ const PageRenderer: React.FC<RendererProps> = ({
           )
         }
 
+        if (isImageButtonCollectionBlock(block)) {
+          return (
+            <ImageButtonCollectionRenderer
+              key={block.id}
+              buttons={block.properties.buttons}
+              styles={styles?.image_button_collection}
+              stylesButtons={styles?.image_button_collection_item}
+              onPress={callbacks?.image_button}
+              theme={theme}
+            />
+          )
+        }
+
         if (isButtonBlock(block)) {
           return (
             <ButtonRenderer
@@ -173,8 +193,8 @@ const PageRenderer: React.FC<RendererProps> = ({
               icon={block.properties.icon}
               image_path={block.properties.image_path}
               image_url={block.properties.image_url}
-              tagline={block.properties.title}
-              text={block.properties.subtitle}
+              title={block.properties.title}
+              subtitle={block.properties.subtitle}
               payload={block.properties.payload}
               styles={styles?.image_button}
               onPress={callbacks?.image_button}
