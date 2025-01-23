@@ -20,6 +20,7 @@ export type ComponentType =
   | 'button_collection'
   | 'image_button_collection'
   | 'video'
+  | 'lottie'
 
 export interface ComponentPropsMap {
   header: { title?: string; subtitle?: string }
@@ -67,6 +68,14 @@ export interface ComponentPropsMap {
     mute: boolean
     subtitle: string
     title: string
+  }
+  lottie: {
+    lottie_url: string
+    lottie_path: string
+    title: string
+    subtitle: string
+    autoplay: boolean
+    looping: boolean
   }
   [key: string]: Record<string, any>
 }
@@ -118,6 +127,7 @@ export interface Styles {
   image_button_collection?: StyleSheet.NamedStyles<any>
   image_button_collection_item?: StyleSheet.NamedStyles<any>
   video?: StyleSheet.NamedStyles<any>
+  lottie?: StyleSheet.NamedStyles<any>
 }
 
 export interface Callbacks {

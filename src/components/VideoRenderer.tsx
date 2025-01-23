@@ -16,7 +16,7 @@ interface VideoRendererProps {
   theme?: Theme
 }
 
-const ImageRenderer: React.FC<VideoRendererProps> = ({
+const VideoRenderer: React.FC<VideoRendererProps> = ({
   video_url,
   autoplay,
   controls,
@@ -38,11 +38,11 @@ const ImageRenderer: React.FC<VideoRendererProps> = ({
       }}
       style={[_styles.backgroundVideo, styles?.backgroundVideo]}
       resizeMode={'contain'}
-      controls={controls}
-      muted={mute}
-      repeat={looping}
-      fullscreen={fullscreen}
-      paused={!!autoplay}
+      controls={Boolean(controls)}
+      muted={Boolean(mute)}
+      repeat={Boolean(looping)}
+      fullscreen={Boolean(fullscreen)}
+      paused={Boolean(autoplay)}
     />
   )
 }
@@ -54,4 +54,4 @@ const _styles = StyleSheet.create({
   },
 })
 
-export default React.memo(ImageRenderer)
+export default React.memo(VideoRenderer)
