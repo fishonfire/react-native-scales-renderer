@@ -18,6 +18,7 @@ import CTAButtonRenderer from './CTAButtonRenderer'
 import ButtonCollectionRenderer from './ButtonCollectionRenderer'
 import ImageButtonCollectionRenderer from './ImageButtonCollectionRenderer'
 import VideoRenderer from './VideoRenderer'
+import LottieRenderer from './LottieRenderer'
 
 interface RendererProps {
   page: Page
@@ -80,6 +81,12 @@ function isVideoBlock(
   block: Block
 ): block is Block & { properties: ComponentPropsMap['video'] } {
   return block.component_type === 'video'
+}
+
+function isLottieBlock(
+  block: Block
+): block is Block & { properties: ComponentPropsMap['lottie'] } {
+  return block.component_type === 'lottie'
 }
 
 const PageRenderer: React.FC<RendererProps> = ({
@@ -223,6 +230,21 @@ const PageRenderer: React.FC<RendererProps> = ({
               looping={block.properties.looping}
               mute={block.properties.mute}
               styles={styles?.video}
+              theme={theme}
+            />
+          )
+        }
+
+        if (isLottieBlock(block)) {
+          return (
+            <LottieRenderer
+              key={block.id}
+              lottie_url={block.properties.lottie_url}
+              title={block.properties.title}
+              subtitle={block.properties.subtitle}
+              autoplay={block.properties.autoplay}
+              looping={block.properties.looping}
+              styles={styles?.lottie}
               theme={theme}
             />
           )

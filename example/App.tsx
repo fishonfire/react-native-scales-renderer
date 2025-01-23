@@ -438,6 +438,13 @@ const stylesVideo: Styles['video'] = StyleSheet.create({
   },
 })
 
+const stylesLottie: Styles['video'] = StyleSheet.create({
+  container: {
+    width: '100%',
+    height: 100,
+  },
+})
+
 const stylesCMS: Styles = {
   markdown: stylesMarkdown,
   image: {
@@ -452,4 +459,5 @@ const stylesCMS: Styles = {
   image_button_collection: stylesImageButtonCollection,
   image_button_collection_item: stylesImageButtonCollectionItem,
   video: stylesVideo,
+  lottie: stylesLottie,
 }
