@@ -13,17 +13,18 @@ react-native-scales-renderer requires the following dependencies:
 - react-native-markdown-display 
 - react-native-video
 - lottie-react-native
+- react-native-linear-gradient
 
 Install the package using `npm` or `yarn`:
 
 ```bash
-npm install react-native-scales-renderer axios react-native-svg react-native-heroicons react-native-markdown-display react-native-video lottie-react-native 
+npm install react-native-scales-renderer axios react-native-svg react-native-heroicons react-native-markdown-display react-native-video lottie-react-native react-native-linear-gradient 
 ```
 
 or
 
 ```bash
-yarn add react-native-scales-renderer axios react-native-svg react-native-heroicons react-native-markdown-display react-native-video lottie-react-native
+yarn add react-native-scales-renderer axios react-native-svg react-native-heroicons react-native-markdown-display react-native-video lottie-react-native react-native-linear-gradient
 ```
 
 ---
