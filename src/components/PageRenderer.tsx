@@ -17,6 +17,7 @@ import { Theme } from '@react-navigation/native'
 import CTAButtonRenderer from './CTAButtonRenderer'
 import ButtonCollectionRenderer from './ButtonCollectionRenderer'
 import ImageButtonCollectionRenderer from './ImageButtonCollectionRenderer'
+import VideoRenderer from './VideoRenderer'
 
 interface RendererProps {
   page: Page
@@ -73,6 +74,12 @@ function isImageButtonBlock(
   block: Block
 ): block is Block & { properties: ComponentPropsMap['image_button'] } {
   return block.component_type === 'image_button'
+}
+
+function isVideoBlock(
+  block: Block
+): block is Block & { properties: ComponentPropsMap['video'] } {
+  return block.component_type === 'video'
 }
 
 const PageRenderer: React.FC<RendererProps> = ({
@@ -198,6 +205,24 @@ const PageRenderer: React.FC<RendererProps> = ({
               payload={block.properties.payload}
               styles={styles?.image_button}
               onPress={callbacks?.image_button}
+              theme={theme}
+            />
+          )
+        }
+
+        if (isVideoBlock(block)) {
+          return (
+            <VideoRenderer
+              key={block.id}
+              video_url={block.properties.video_url}
+              title={block.properties.title}
+              subtitle={block.properties.subtitle}
+              autoplay={block.properties.autoplay}
+              controls={block.properties.controls}
+              fullscreen={block.properties.fullscreen}
+              looping={block.properties.looping}
+              mute={block.properties.mute}
+              styles={styles?.video}
               theme={theme}
             />
           )

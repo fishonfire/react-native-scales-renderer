@@ -431,6 +431,13 @@ const stylesImageButton: Styles['image_button'] = StyleSheet.create({
   },
 })
 
+const stylesVideo: Styles['video'] = StyleSheet.create({
+  backgroundVideo: {
+    width: '100%',
+    height: 256,
+  },
+})
+
 const stylesCMS: Styles = {
   markdown: stylesMarkdown,
   image: {
@@ -444,4 +451,5 @@ const stylesCMS: Styles = {
   button_collection: stylesButtonCollection,
   image_button_collection: stylesImageButtonCollection,
   image_button_collection_item: stylesImageButtonCollectionItem,
+  video: stylesVideo,
 }
