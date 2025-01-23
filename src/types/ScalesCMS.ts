@@ -19,6 +19,7 @@ export type ComponentType =
   | 'image_button'
   | 'button_collection'
   | 'image_button_collection'
+  | 'video'
 
 export interface ComponentPropsMap {
   header: { title?: string; subtitle?: string }
@@ -55,6 +56,17 @@ export interface ComponentPropsMap {
   }
   image_button_collection: {
     buttons: ComponentPropsMap['image_button'][]
+  }
+  video: {
+    video_url: string
+    video_path: string
+    autoplay: boolean
+    controls: boolean
+    fullscreen: boolean
+    looping: boolean
+    mute: boolean
+    subtitle: string
+    title: string
   }
   [key: string]: Record<string, any>
 }
@@ -105,6 +117,7 @@ export interface Styles {
   button_collection?: StyleSheet.NamedStyles<any>
   image_button_collection?: StyleSheet.NamedStyles<any>
   image_button_collection_item?: StyleSheet.NamedStyles<any>
+  video?: StyleSheet.NamedStyles<any>
 }
 
 export interface Callbacks {
