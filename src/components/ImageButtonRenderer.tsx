@@ -8,6 +8,7 @@ import {
 } from 'react-native'
 import Icon from './Icon'
 import { type Theme } from '@react-navigation/native'
+import LinearGradient from 'react-native-linear-gradient'
 
 interface ImageButtonRendererProps {
   icon?: string
@@ -45,39 +46,49 @@ const ImageButtonRenderer: React.FC<ImageButtonRendererProps> = ({
         source={{ uri: image_url }}
         style={[_styles?.imageBackground, styles?.imageBackground]}
       >
-        <Icon
-          name="arrow-right"
-          color={theme?.colors.background ?? 'white'}
-          style={[_styles?.arrow, styles?.arrow]}
-          size={24}
-        />
-        <View style={[_styles?.contentContainer, styles?.contentContainer]}>
-          <View style={[_styles?.iconContainer, styles?.iconContainer]}>
-            {icon && (
-              <Icon
-                name={icon}
-                color={theme?.colors.background ?? 'white'}
-                size={16}
-              />
-            )}
+        <LinearGradient
+          colors={['#181D2000', '#181D20CC']}
+          locations={[0.3, 1]}
+          style={_styles.linearGradient}
+        >
+          <Icon
+            name="arrow-right"
+            color={theme?.colors.background ?? 'white'}
+            style={[_styles?.arrow, styles?.arrow]}
+            size={24}
+          />
+          <View style={[_styles?.contentContainer, styles?.contentContainer]}>
+            <View style={[_styles?.iconContainer, styles?.iconContainer]}>
+              {icon && (
+                <Icon
+                  name={icon}
+                  color={theme?.colors.background ?? 'white'}
+                  size={16}
+                />
+              )}
 
-            {title && (
+              {title && (
+                <Text
+                  style={[_styles.textTitle, styles?.text, styles?.textTitle]}
+                >
+                  {title}
+                </Text>
+              )}
+            </View>
+
+            {subtitle && (
               <Text
-                style={[_styles.textTitle, styles?.text, styles?.textTitle]}
+                style={[
+                  _styles.textSubtitle,
+                  styles?.text,
+                  styles?.textSubtitle,
+                ]}
               >
-                {title}
+                {subtitle}
               </Text>
             )}
           </View>
-
-          {subtitle && (
-            <Text
-              style={[_styles.textSubtitle, styles?.text, styles?.textSubtitle]}
-            >
-              {subtitle}
-            </Text>
-          )}
-        </View>
+        </LinearGradient>
       </ImageBackground>
     </TouchableOpacity>
   )
@@ -92,6 +103,13 @@ const _styles = StyleSheet.create({
     borderRadius: 8,
     overflow: 'hidden',
     backgroundColor: 'black',
+  },
+  overlayContainer: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.4)',
+  },
+  linearGradient: {
+    flex: 1,
   },
   contentContainer: {
     flex: 1,
