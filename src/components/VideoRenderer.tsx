@@ -37,12 +37,12 @@ const VideoRenderer: React.FC<VideoRendererProps> = ({
         },
       }}
       style={[_styles.backgroundVideo, styles?.backgroundVideo]}
-      resizeMode={'contain'}
+      resizeMode={'cover'}
       controls={Boolean(controls)}
       muted={Boolean(mute)}
       repeat={Boolean(looping)}
       fullscreen={Boolean(fullscreen)}
-      paused={Boolean(autoplay)}
+      paused={!Boolean(autoplay)}
     />
   )
 }
