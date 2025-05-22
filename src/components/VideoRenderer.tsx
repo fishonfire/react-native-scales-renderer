@@ -76,7 +76,6 @@ const VideoRenderer: React.FC<VideoRendererProps> = ({
       onLoadStart={() => setIsLoadError(false)}
       onLoad={() => {
         setIsLoadError(false)
-        videoRef.current?.resume()
       }}
       style={[_styles.backgroundVideo, styles?.backgroundVideo]}
       resizeMode={'cover'}
