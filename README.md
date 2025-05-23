@@ -198,6 +198,12 @@ We welcome contributions! To contribute:
 
 ---
 
+## Publishing
+To publish a new version of the package, follow these steps:
+1. Update the version in `package.json` through Git Flow release.
+2. Run `npx tsc` to compile TypeScript files.
+3. Run `npm publish` to publish the package to npm.
+
 ## Support
 
 If you encounter issues or have questions, please open an issue on the [GitHub repository](https://github.com/fishonfire/react-native-scales-renderer).
