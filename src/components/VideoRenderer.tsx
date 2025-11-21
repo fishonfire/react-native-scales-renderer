@@ -1,10 +1,12 @@
-import React, { useMemo, useRef, useState } from 'react'
-import { Pressable, StyleSheet, View } from 'react-native'
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { Platform, Pressable, StyleSheet, View } from 'react-native'
 import type { Theme } from '@react-navigation/native'
 import Video, { VideoRef } from 'react-native-video'
 import LottieView from 'lottie-react-native'
 import { PlayCircleIcon } from 'react-native-heroicons/solid'
 import { LottieLoaderAnimationJson } from './LottieLoaderAnimationJson'
+import * as ScreenOrientation from 'expo-screen-orientation'
+import { Icon } from 'react-native-scales-renderer'
 
 interface VideoRendererProps {
   video_url?: string
@@ -29,9 +31,14 @@ const VideoRenderer: React.FC<VideoRendererProps> = ({
   title,
   subtitle,
   styles,
+  theme,
 }) => {
   const videoRef = useRef<VideoRef>(null)
   const [isLoadError, setIsLoadError] = useState(false)
+  const [isMuted, setIsMuted] = useState(Boolean(mute))
+  const [isFullscreen, setIsFullscreen] = useState(false)
+  const onEnterFullscreen = () => setIsFullscreen(true)
+  const onExitFullscreen = () => setIsFullscreen(false)
 
   const source = {
     uri: video_url,
@@ -40,6 +47,26 @@ const VideoRenderer: React.FC<VideoRendererProps> = ({
       subtitle,
     },
   }
+
+  useEffect(() => {
+    if (Platform.OS === 'android') {
+      if (isFullscreen) {
+        ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE)
+      } else {
+        ScreenOrientation.lockAsync(
+          ScreenOrientation.OrientationLock.PORTRAIT_UP
+        )
+      }
+
+      return () => {
+        ScreenOrientation.lockAsync(
+          ScreenOrientation.OrientationLock.PORTRAIT_UP
+        )
+      }
+    }
+  }, [isFullscreen])
+
+  const toggleMuted = useCallback(() => setIsMuted(prev => !prev), [])
 
   const LottieLoaderAnimation = useMemo(
     () => JSON.parse(LottieLoaderAnimationJson),
@@ -62,32 +89,45 @@ const VideoRenderer: React.FC<VideoRendererProps> = ({
   }
 
   return (
-    <Video
-      ref={videoRef}
-      source={source}
-      renderLoader={() => (
-        <LottieView
-          source={LottieLoaderAnimation}
-          style={_styles.reloadIcon}
-          loop
-          autoPlay
+    <View>
+      <Video
+        ref={videoRef}
+        source={source}
+        renderLoader={() => (
+          <LottieView
+            source={LottieLoaderAnimation}
+            style={_styles.reloadIcon}
+            loop
+            autoPlay
+          />
+        )}
+        onError={() => {
+          setIsLoadError(true)
+        }}
+        onLoadStart={() => setIsLoadError(false)}
+        onLoad={() => {
+          setIsLoadError(false)
+        }}
+        style={[_styles.backgroundVideo, styles?.backgroundVideo]}
+        resizeMode={isFullscreen ? 'contain' : 'cover'}
+        controls={Boolean(controls)}
+        volume={isMuted ? 0 : 1}
+        repeat={Boolean(looping)}
+        fullscreen={Boolean(fullscreen)}
+        paused={!Boolean(autoplay)}
+        onFullscreenPlayerWillPresent={onEnterFullscreen}
+        onFullscreenPlayerWillDismiss={onExitFullscreen}
+        onFullscreenPlayerDidDismiss={onExitFullscreen}
+      />
+
+      <Pressable onPress={toggleMuted} style={_styles.muteControl}>
+        <Icon
+          size={32}
+          name={isMuted ? 'speaker-x-mark' : 'speaker-wave'}
+          color={theme?.colors.primary}
         />
-      )}
-      onError={() => {
-        setIsLoadError(true)
-      }}
-      onLoadStart={() => setIsLoadError(false)}
-      onLoad={() => {
-        setIsLoadError(false)
-      }}
-      style={[_styles.backgroundVideo, styles?.backgroundVideo]}
-      resizeMode={'cover'}
-      controls={Boolean(controls)}
-      muted={Boolean(mute)}
-      repeat={Boolean(looping)}
-      fullscreen={Boolean(fullscreen)}
-      paused={!Boolean(autoplay)}
-    />
+      </Pressable>
+    </View>
   )
 }
 
@@ -104,6 +144,9 @@ const _styles = StyleSheet.create({
     backgroundColor: 'black',
     borderRadius: 8,
     overflow: 'hidden',
+  },
+  muteControl: {
+    marginVertical: 8,
   },
 })
 
